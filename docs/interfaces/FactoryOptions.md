@@ -6,31 +6,34 @@ Factory options. Used for generating/destroying/validating resources & other con
 
 ## Type parameters
 
-Name |
-:------ |
-`T` |
+| Name |
+| :------ |
+| `T` |
 
 ## Table of contents
 
 ### Properties
 
-- [acquireTimeoutMillis](factoryoptions.md#acquiretimeoutmillis)
-- [create](factoryoptions.md#create)
-- [destroy](factoryoptions.md#destroy)
-- [idleTimeoutMillis](factoryoptions.md#idletimeoutmillis)
-- [log](factoryoptions.md#log)
-- [max](factoryoptions.md#max)
-- [maxUses](factoryoptions.md#maxuses)
-- [min](factoryoptions.md#min)
-- [name](factoryoptions.md#name)
-- [reapIntervalMillis](factoryoptions.md#reapintervalmillis)
-- [validate](factoryoptions.md#validate)
+- [acquireTimeoutMillis](FactoryOptions.md#acquiretimeoutmillis)
+- [idleTimeoutMillis](FactoryOptions.md#idletimeoutmillis)
+- [log](FactoryOptions.md#log)
+- [max](FactoryOptions.md#max)
+- [maxUses](FactoryOptions.md#maxuses)
+- [min](FactoryOptions.md#min)
+- [name](FactoryOptions.md#name)
+- [reapIntervalMillis](FactoryOptions.md#reapintervalmillis)
+
+### Methods
+
+- [create](FactoryOptions.md#create)
+- [destroy](FactoryOptions.md#destroy)
+- [validate](FactoryOptions.md#validate)
 
 ## Properties
 
 ### acquireTimeoutMillis
 
-• `Optional` **acquireTimeoutMillis**: *number*
+• `Optional` **acquireTimeoutMillis**: `number`
 
 Delay in milliseconds after which pending acquire request in the pool will be rejected.
 Pending acquires are acquire calls which are yet to receive an response from factory.create
@@ -39,44 +42,9 @@ Pending acquires are acquire calls which are yet to receive an response from fac
 
 ___
 
-### create
-
-• **create**: () => *Promise*<T\>
-
-Should create the item to be acquired
-
-#### Type declaration:
-
-▸ (): *Promise*<T\>
-
-**Returns:** *Promise*<T\>
-
-___
-
-### destroy
-
-• **destroy**: (`resource`: T) => *void* \| *Promise*<void\>
-
-Should gently close any resources that the item is using.
-Called when resource is destroyed.
-
-#### Type declaration:
-
-▸ (`resource`: T): *void* \| *Promise*<void\>
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`resource` | T |
-
-**Returns:** *void* \| *Promise*<void\>
-
-___
-
 ### idleTimeoutMillis
 
-• `Optional` **idleTimeoutMillis**: *number*
+• `Optional` **idleTimeoutMillis**: `number`
 
 Delay in milliseconds after which available resources in the pool will be destroyed.
 This does not affects pending acquire requests.
@@ -87,7 +55,7 @@ ___
 
 ### log
 
-• `Optional` **log**: *boolean* \| FactoryLogger
+• `Optional` **log**: `boolean` \| [`FactoryLogger`](../README.md#factorylogger)
 
 Whether the pool should log activity. If function is specified,
 that will be used instead. The function expects the arguments msg, loglevel
@@ -98,7 +66,7 @@ ___
 
 ### max
 
-• **max**: *number*
+• **max**: `number`
 
 Maximum number of items that can exist at the same time.
 Any further acquire requests will be pushed to the waiting list.
@@ -107,7 +75,7 @@ ___
 
 ### maxUses
 
-• `Optional` **maxUses**: *number*
+• `Optional` **maxUses**: `number`
 
 The number of times an item is to be used before it is destroyed
 no matter whether it is still healthy.  A value of 0 indicates the
@@ -122,7 +90,7 @@ ___
 
 ### min
 
-• **min**: *number*
+• **min**: `number`
 
 Minimum number of items in pool (including in-use).
 When the pool is created, or a resource destroyed, this minimum will
@@ -133,7 +101,7 @@ ___
 
 ### name
 
-• `Optional` **name**: *string*
+• `Optional` **name**: `string`
 
 Name of the factory. Serves only logging purposes.
 
@@ -141,30 +109,59 @@ ___
 
 ### reapIntervalMillis
 
-• `Optional` **reapIntervalMillis**: *number*
+• `Optional` **reapIntervalMillis**: `number`
 
 Clean up is scheduled in every `factory.reapIntervalMillis` milliseconds.
 
 **`default`** 1000
 
+## Methods
+
+### create
+
+▸ **create**(): `Promise`<`T`\>
+
+Should create the item to be acquired
+
+#### Returns
+
+`Promise`<`T`\>
+
+___
+
+### destroy
+
+▸ **destroy**(`resource`): `void` \| `Promise`<`void`\>
+
+Should gently close any resources that the item is using.
+Called when resource is destroyed.
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `resource` | `T` |
+
+#### Returns
+
+`void` \| `Promise`<`void`\>
+
 ___
 
 ### validate
 
-• **validate**: (`resource`: T) => *boolean*
+▸ **validate**(`resource`): `boolean`
 
 Should return true if connection is still valid and false
 If it should be removed from pool. Called before item is
 acquired from pool.
 
-#### Type declaration:
+#### Parameters
 
-▸ (`resource`: T): *boolean*
+| Name | Type |
+| :------ | :------ |
+| `resource` | `T` |
 
-#### Parameters:
+#### Returns
 
-Name | Type |
-:------ | :------ |
-`resource` | T |
-
-**Returns:** *boolean*
+`boolean`

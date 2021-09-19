@@ -1,8 +1,8 @@
 import { Deferred } from './Deferred';
 import { AggregateError } from './AggregateError';
 
-type LogLevel = 'verbose' | 'info' | 'error';
-type FactoryLogger = (message: string, level: LogLevel) => void;
+export type LogLevel = 'verbose' | 'info' | 'error';
+export type FactoryLogger = (message: string, level: LogLevel) => void;
 
 // Various resources
 type PooledObject<T> = {
@@ -326,9 +326,8 @@ export class Pool<RawResource> {
 
     while (this._availableObjects.length > 0) {
       this._log('dispense() - reusing obj', 'verbose');
-      wrappedResource = this._availableObjects[
-        this._availableObjects.length - 1
-      ];
+      wrappedResource =
+        this._availableObjects[this._availableObjects.length - 1];
       if (!this._factory.validate(wrappedResource.resource)) {
         this.destroy(wrappedResource.resource);
         continue;
