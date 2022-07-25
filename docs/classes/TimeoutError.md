@@ -21,12 +21,12 @@ Error which is thrown by pool when acquire request timeouts
 - [message](TimeoutError.md#message)
 - [name](TimeoutError.md#name)
 - [stack](TimeoutError.md#stack)
+- [prepareStackTrace](TimeoutError.md#preparestacktrace)
 - [stackTraceLimit](TimeoutError.md#stacktracelimit)
 
 ### Methods
 
 - [captureStackTrace](TimeoutError.md#capturestacktrace)
-- [prepareStackTrace](TimeoutError.md#preparestacktrace)
 
 ## Constructors
 
@@ -76,6 +76,37 @@ Error.stack
 
 ___
 
+### prepareStackTrace
+
+▪ `Static` `Optional` **prepareStackTrace**: (`err`: `Error`, `stackTraces`: `CallSite`[]) => `any`
+
+#### Type declaration
+
+▸ (`err`, `stackTraces`): `any`
+
+Optional override for formatting stack traces
+
+**`See`**
+
+https://github.com/v8/v8/wiki/Stack%20Trace%20API#customizing-stack-traces
+
+##### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `err` | `Error` |
+| `stackTraces` | `CallSite`[] |
+
+##### Returns
+
+`any`
+
+#### Inherited from
+
+Error.prepareStackTrace
+
+___
+
 ### stackTraceLimit
 
 ▪ `Static` **stackTraceLimit**: `number`
@@ -106,28 +137,3 @@ Create .stack property on a target object
 #### Inherited from
 
 Error.captureStackTrace
-
-___
-
-### prepareStackTrace
-
-▸ `Static` `Optional` **prepareStackTrace**(`err`, `stackTraces`): `any`
-
-Optional override for formatting stack traces
-
-**`see`** https://github.com/v8/v8/wiki/Stack%20Trace%20API#customizing-stack-traces
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `err` | `Error` |
-| `stackTraces` | `CallSite`[] |
-
-#### Returns
-
-`any`
-
-#### Inherited from
-
-Error.prepareStackTrace

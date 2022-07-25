@@ -14,12 +14,12 @@ sequelize-pool
 
 - [FactoryOptions](interfaces/FactoryOptions.md)
 
-### Type aliases
+### Type Aliases
 
 - [FactoryLogger](README.md#factorylogger)
 - [LogLevel](README.md#loglevel)
 
-## Type aliases
+## Type Aliases
 
 ### FactoryLogger
 

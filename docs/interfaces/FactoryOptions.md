@@ -15,6 +15,8 @@ Factory options. Used for generating/destroying/validating resources & other con
 ### Properties
 
 - [acquireTimeoutMillis](FactoryOptions.md#acquiretimeoutmillis)
+- [create](FactoryOptions.md#create)
+- [destroy](FactoryOptions.md#destroy)
 - [idleTimeoutMillis](FactoryOptions.md#idletimeoutmillis)
 - [log](FactoryOptions.md#log)
 - [max](FactoryOptions.md#max)
@@ -22,11 +24,6 @@ Factory options. Used for generating/destroying/validating resources & other con
 - [min](FactoryOptions.md#min)
 - [name](FactoryOptions.md#name)
 - [reapIntervalMillis](FactoryOptions.md#reapintervalmillis)
-
-### Methods
-
-- [create](FactoryOptions.md#create)
-- [destroy](FactoryOptions.md#destroy)
 - [validate](FactoryOptions.md#validate)
 
 ## Properties
@@ -38,7 +35,48 @@ Factory options. Used for generating/destroying/validating resources & other con
 Delay in milliseconds after which pending acquire request in the pool will be rejected.
 Pending acquires are acquire calls which are yet to receive an response from factory.create
 
-**`default`** 30000
+**`Default`**
+
+30000
+
+___
+
+### create
+
+• **create**: () => `Promise`<`T`\>
+
+#### Type declaration
+
+▸ (): `Promise`<`T`\>
+
+Should create the item to be acquired
+
+##### Returns
+
+`Promise`<`T`\>
+
+___
+
+### destroy
+
+• **destroy**: (`resource`: `T`) => `void` \| `Promise`<`void`\>
+
+#### Type declaration
+
+▸ (`resource`): `void` \| `Promise`<`void`\>
+
+Should gently close any resources that the item is using.
+Called when resource is destroyed.
+
+##### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `resource` | `T` |
+
+##### Returns
+
+`void` \| `Promise`<`void`\>
 
 ___
 
@@ -49,7 +87,9 @@ ___
 Delay in milliseconds after which available resources in the pool will be destroyed.
 This does not affects pending acquire requests.
 
-**`default`** 30000
+**`Default`**
+
+30000
 
 ___
 
@@ -60,7 +100,9 @@ ___
 Whether the pool should log activity. If function is specified,
 that will be used instead. The function expects the arguments msg, loglevel
 
-**`default`** false
+**`Default`**
+
+false
 
 ___
 
@@ -84,7 +126,9 @@ This can help with "re-balancing" connections when pool members behind
 a load balancer are added but are not being adopted due to pools being
 full of pre-existing persistent connections.
 
-**`default`** Infinity
+**`Default`**
+
+Infinity
 
 ___
 
@@ -113,55 +157,30 @@ ___
 
 Clean up is scheduled in every `factory.reapIntervalMillis` milliseconds.
 
-**`default`** 1000
+**`Default`**
 
-## Methods
-
-### create
-
-▸ **create**(): `Promise`<`T`\>
-
-Should create the item to be acquired
-
-#### Returns
-
-`Promise`<`T`\>
-
-___
-
-### destroy
-
-▸ **destroy**(`resource`): `void` \| `Promise`<`void`\>
-
-Should gently close any resources that the item is using.
-Called when resource is destroyed.
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `resource` | `T` |
-
-#### Returns
-
-`void` \| `Promise`<`void`\>
+1000
 
 ___
 
 ### validate
 
-▸ **validate**(`resource`): `boolean`
+• **validate**: (`resource`: `T`) => `boolean`
+
+#### Type declaration
+
+▸ (`resource`): `boolean`
 
 Should return true if connection is still valid and false
 If it should be removed from pool. Called before item is
 acquired from pool.
 
-#### Parameters
+##### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `resource` | `T` |
 
-#### Returns
+##### Returns
 
 `boolean`
