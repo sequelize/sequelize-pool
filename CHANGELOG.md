@@ -1,9 +1,16 @@
 # Changelog
 
-## 7.x
+## 8.0.0
+
+- fix: correctly default pool configuration options, fixes [#48](https://github.com/sequelize/sequelize-pool/issues/48)
+
+## 7.1.0
+
+- fix: `acquire` not resolving after destroying available resources
+
+## 7.0.0
 
 - breaking: Support only `Node >= 10`
-- fix: `acquire` not resolving after destroying available resources
 
 ## 6.0.0
 
