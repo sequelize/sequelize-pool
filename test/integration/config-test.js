@@ -61,3 +61,25 @@ tap.test('fail without factory.validate', (t) => {
   }, 'validate function is required');
   t.end();
 });
+
+tap.test('correctly defaults', (t) => {
+  const factory = {
+    name: 'test-config-defaults',
+    create: () => {},
+    destroy: () => {},
+    validate: () => true,
+    max: 1,
+    min: 0,
+    idleTimeoutMillis: 0,
+    acquireTimeoutMillis: undefined,
+    reapIntervalMillis: null,
+  };
+
+  const pool = new Pool(factory);
+
+  t.equal(pool.idleTimeoutMillis, 0);
+  t.equal(pool.acquireTimeoutMillis, 30000);
+  t.equal(pool.reapIntervalMillis, 1000);
+
+  t.end();
+});

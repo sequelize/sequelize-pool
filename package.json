@@ -40,7 +40,7 @@
     "build": "tsc",
     "test": "npm run lint && npm run test:raw",
     "lint": "eslint --ext .js,.ts src/**/* test/**/*",
-    "pretty": "prettier src/**/*.ts test/**/*.js --write",
+    "pretty": "prettier src test --write",
     "docs": "typedoc",
     "test:raw": "tap test/**/*-test.js"
   },

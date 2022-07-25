@@ -1,5 +1,6 @@
 import { Deferred } from './Deferred';
 import { AggregateError } from './AggregateError';
+import { defaultTo } from './helpers/defaultTo';
 
 export type LogLevel = 'verbose' | 'info' | 'error';
 export type FactoryLogger = (message: string, level: LogLevel) => void;
@@ -164,11 +165,11 @@ export class Pool<RawResource> {
     }
 
     // defaults
-    this.idleTimeoutMillis = factory.idleTimeoutMillis || 30000;
-    this.acquireTimeoutMillis = factory.acquireTimeoutMillis || 30000;
-    this.reapIntervalMillis = factory.reapIntervalMillis || 1000;
-    this.maxUsesPerResource = factory.maxUses || Infinity;
-    this.log = factory.log || false;
+    this.idleTimeoutMillis = defaultTo(factory.idleTimeoutMillis, 30000);
+    this.acquireTimeoutMillis = defaultTo(factory.acquireTimeoutMillis, 30000);
+    this.reapIntervalMillis = defaultTo(factory.reapIntervalMillis, 1000);
+    this.maxUsesPerResource = defaultTo(factory.maxUses, Infinity);
+    this.log = defaultTo(factory.log, false);
 
     this._factory = factory;
     this._count = 0;
