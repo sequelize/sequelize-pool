@@ -47,5 +47,8 @@
   "prettier": {
     "singleQuote": true
   },
+  "tap": {
+    "check-coverage": false
+  },
   "license": "MIT"
 }

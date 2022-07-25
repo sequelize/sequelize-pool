@@ -120,7 +120,7 @@ tap.test('drains', (t) => {
 
   // ensure there are objects in pending queue
   // so drain can clear both pending and in-use queues
-  t.notEqual(count, acquired);
+  t.not(count, acquired);
 
   pool
     .drain()
@@ -558,7 +558,7 @@ tap.test('pool destroys a resource when maxUses is reached', (t) => {
 
       pool.acquire().then((clientC) => {
         // The third client should be new because the second was end-of-lifed
-        t.notEqual(clientB, clientC);
+        t.not(clientB, clientC);
         // assert the first connection was destroyed once the max-use limit was reached
         t.equal(0, resourceFactory.bin[0].id);
         t.end();
@@ -591,7 +591,7 @@ tap.test('pool does not leak expired resources to pending requests', (t) => {
     // caused the pending requests to get a connection that was about to be
     // destroyed.
     pool.acquire().then((clientB) => {
-      t.notEqual(clientA, clientB);
+      t.not(clientA, clientB);
       pool.release(clientB);
       t.end();
     });
