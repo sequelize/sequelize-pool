@@ -19,9 +19,9 @@
     "types"
   ],
   "types": "types",
-  "dependencies": {},
   "devDependencies": {
     "@types/node": "^10.17.60",
+    "@types/tap": "^15.0.7",
     "@typescript-eslint/eslint-plugin": "^5.30.7",
     "@typescript-eslint/parser": "^5.30.7",
     "eslint": "^8.20.0",
@@ -37,12 +37,13 @@
     "node": ">= 10.0.0"
   },
   "scripts": {
-    "build": "tsc",
+    "build": "tsc -b tsconfig-build.json",
+    "types": "tsc",
     "test": "npm run lint && npm run test:raw",
-    "lint": "eslint --ext .js,.ts src/**/* test/**/*",
+    "lint": "eslint --ext .ts src/**/* test/**/*",
     "pretty": "prettier src test --write",
     "docs": "typedoc",
-    "test:raw": "tap test/**/*-test.js"
+    "test:raw": "tap --ts test/**/*-test.ts"
   },
   "prettier": {
     "singleQuote": true

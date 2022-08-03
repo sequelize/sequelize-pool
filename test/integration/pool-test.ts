@@ -1,6 +1,6 @@
-const tap = require('tap');
-const { Pool, TimeoutError } = require('../..');
-const { ResourceFactory, delay } = require('../utils');
+import * as tap from 'tap';
+import { LogLevel, Pool, TimeoutError } from '../../src';
+import { ResourceFactory, delay } from '../utils';
 
 tap.test('pool expands only to max limit', (t) => {
   const resourceFactory = new ResourceFactory();
@@ -97,7 +97,7 @@ tap.test('drains', (t) => {
 
   const resourceFactory = new ResourceFactory();
 
-  const pool = new Pool({
+  const pool = new Pool<{ id: number }>({
     name: 'test4',
     create: resourceFactory.create.bind(resourceFactory),
     destroy: resourceFactory.destroy.bind(resourceFactory),
@@ -140,22 +140,29 @@ tap.test('drains', (t) => {
 
 tap.test('logging', (t) => {
   const logLevels = { verbose: 0, info: 1, warn: 2, error: 3 };
-  const logMessages = { verbose: [], info: [], warn: [], error: [] };
+  const logMessages: Record<LogLevel, string[]> = {
+    verbose: [],
+    info: [],
+    warn: [],
+    error: [],
+  };
   const resourceFactory = new ResourceFactory();
 
   const factory = {
     name: 'test12',
     create: resourceFactory.create.bind(resourceFactory),
-    destroy: () => {},
-    validate: () => {},
+    destroy: () => {
+      // noop
+    },
+    validate: () => false,
     max: 2,
     min: 0,
     idleTimeoutMillis: 100,
-    log: function (msg, level) {
+    log: function (msg: string, level: LogLevel) {
       testlog(msg, level);
     },
   };
-  const testlog = function (msg, level) {
+  const testlog = function (msg: string, level: LogLevel) {
     t.ok(level in logLevels);
     logMessages[level].push(msg);
   };
@@ -164,8 +171,10 @@ tap.test('logging', (t) => {
   const pool2 = new Pool({
     name: 'testNoLog',
     create: resourceFactory.create.bind(resourceFactory),
-    destroy: () => {},
-    validate: () => {},
+    destroy: () => {
+      //noop
+    },
+    validate: () => false,
     max: 2,
     min: 0,
     idleTimeoutMillis: 100,
@@ -196,7 +205,7 @@ tap.test('removes from available objects on destroy', (t) => {
     destroy: function () {
       destroyCalled = true;
     },
-    validate: () => {},
+    validate: () => false,
     max: 2,
     min: 0,
     idleTimeoutMillis: 100,
@@ -226,14 +235,14 @@ tap.test('waits on destroy promise on destroy', (t) => {
       return Promise.resolve({});
     },
     destroy: function () {
-      return new Promise((resolve) => {
+      return new Promise<void>((resolve) => {
         setTimeout(() => {
           destroyResolved = true;
           resolve();
         }, 100);
       });
     },
-    validate: () => {},
+    validate: () => false,
     max: 2,
     min: 0,
     idleTimeoutMillis: 100,
@@ -265,7 +274,7 @@ tap.test(
       destroy: function () {
         destroyCalled++;
       },
-      validate: () => {},
+      validate: () => false,
       max: 2,
       min: 0,
       idleTimeoutMillis: 100,
@@ -311,7 +320,7 @@ tap.test(
 tap.test('removes from available objects on validation failure', (t) => {
   let destroyCalled = 0;
   let validateCalled = 0;
-  let destroyedClient = null;
+  let destroyedClient: { count: number } = null;
   let count = 0;
 
   const factory = {
@@ -319,11 +328,11 @@ tap.test('removes from available objects on validation failure', (t) => {
     create: () => {
       return Promise.resolve({ count: count++ });
     },
-    destroy: (client) => {
+    destroy: (client: { count: number }) => {
       destroyCalled++;
       destroyedClient = client;
     },
-    validate: (client) => {
+    validate: (client: { count: number }) => {
       validateCalled++;
       return client.count > 0;
     },
@@ -371,8 +380,10 @@ tap.test('acquire resolves after some failures', (t) => {
         return Promise.resolve({});
       }
     },
-    destroy: () => {},
-    validate: () => {},
+    destroy: () => {
+      //noop
+    },
+    validate: () => false,
     max: 1,
     min: 0,
   };
@@ -396,8 +407,10 @@ tap.test('returns only valid object to the pool', (t) => {
     create: function () {
       return delay(1).then(() => ({ id: 'validId' }));
     },
-    destroy: () => {},
-    validate: () => {},
+    destroy: () => {
+      //noop
+    },
+    validate: () => false,
     max: 1,
     min: 0,
     idleTimeoutMillis: 100,
@@ -410,6 +423,7 @@ tap.test('returns only valid object to the pool', (t) => {
       t.equal(pool.using, 1);
 
       // Invalid release
+      // @ts-expect-error release invalid object
       pool.release({});
       t.equal(pool.available, 0);
       t.equal(pool.using, 1);
@@ -436,7 +450,7 @@ tap.test(
       destroy: function () {
         destroyCalled++;
       },
-      validate: () => {},
+      validate: () => false,
       max: 2,
       min: 0,
       idleTimeoutMillis: 100,
@@ -487,7 +501,7 @@ tap.test(
       destroy: function () {
         throw new Error('Error');
       },
-      validate: () => {},
+      validate: () => false,
       max: 2,
       min: 0,
       idleTimeoutMillis: 100,

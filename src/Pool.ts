@@ -2,7 +2,7 @@ import { Deferred } from './Deferred';
 import { AggregateError } from './AggregateError';
 import { defaultTo } from './helpers/defaultTo';
 
-export type LogLevel = 'verbose' | 'info' | 'error';
+export type LogLevel = 'verbose' | 'info' | 'warn' | 'error';
 export type FactoryLogger = (message: string, level: LogLevel) => void;
 
 // Various resources

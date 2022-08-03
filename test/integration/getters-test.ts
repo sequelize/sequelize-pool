@@ -1,12 +1,15 @@
-const tap = require('tap');
-const Pool = require('../..').Pool;
+import * as tap from 'tap';
+import { Pool } from '../../src';
+
 const random = () => Math.floor(Math.random() * 1000);
 
 tap.test('pool.name', (t) => {
   const pool = new Pool({
     name: 'test-pool.name',
     create: () => Promise.resolve({ id: random() }),
-    destroy: () => {},
+    destroy: () => {
+      //noop
+    },
     validate: () => true,
     max: 2,
     min: 0,
@@ -20,7 +23,9 @@ tap.test('pool.size', (t) => {
   const pool = new Pool({
     name: 'test-pool.size',
     create: () => Promise.resolve({ id: random() }),
-    destroy: () => {},
+    destroy: () => {
+      //noop
+    },
     validate: () => true,
     max: 2,
     min: 0,
@@ -55,7 +60,9 @@ tap.test('pool.available', (t) => {
   const pool = new Pool({
     name: 'test-pool.available',
     create: () => Promise.resolve({ id: random() }),
-    destroy: () => {},
+    destroy: () => {
+      //noop
+    },
     validate: () => true,
     max: 2,
     min: 0,

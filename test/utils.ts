@@ -1,8 +1,14 @@
+type FactoryItem = { id: number };
+
 /**
  * Generic class for handling creation of resources
  * for testing
  */
-class ResourceFactory {
+export class ResourceFactory {
+  created: number;
+  destroyed: number;
+  bin: FactoryItem[];
+
   constructor() {
     this.created = 0;
     this.destroyed = 0;
@@ -15,7 +21,7 @@ class ResourceFactory {
     }));
   }
 
-  destroy(resource) {
+  destroy(resource: FactoryItem) {
     this.destroyed++;
     this.bin.push(resource);
   }
@@ -25,9 +31,6 @@ class ResourceFactory {
   }
 }
 
-exports.ResourceFactory = ResourceFactory;
-
-function delay(ms) {
+export function delay(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
-exports.delay = delay;

@@ -1,6 +1,6 @@
-const tap = require('tap');
-const Pool = require('../..').Pool;
-const { delay } = require('../utils');
+import * as tap from 'tap';
+import { Pool } from '../../src';
+import { delay } from '../utils';
 
 tap.test('async multiple calls', (t) => {
   let createCount = 0;
@@ -14,20 +14,22 @@ tap.test('async multiple calls', (t) => {
       });
     },
     validate: () => true,
-    destroy: () => {},
+    destroy: () => {
+      // noop
+    },
     max: 3,
     min: 0,
     idleTimeoutMillis: 100,
     log: false,
   });
 
-  const borrowedObjects = [];
+  const borrowedObjects: Array<{ id: number }> = [];
 
   const acquireRelease = function (
-    num,
-    inUseCount,
-    availableCount,
-    releaseTimeout
+    num: number,
+    inUseCount?: number,
+    availableCount?: number,
+    releaseTimeout?: number
   ) {
     releaseTimeout = releaseTimeout || 100;
     inUseCount = inUseCount === undefined ? 0 : inUseCount;

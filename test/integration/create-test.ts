@@ -1,6 +1,6 @@
-const tap = require('tap');
-const Pool = require('../..').Pool;
-const { delay } = require('../utils');
+import * as tap from 'tap';
+import { Pool } from '../../src';
+import { delay } from '../utils';
 
 tap.test('factory.create', (t) => {
   tap.test('handle creation errors', (t) => {
@@ -14,8 +14,10 @@ tap.test('factory.create', (t) => {
           return Promise.resolve({ id: created });
         }
       },
-      destroy: () => {},
-      validate: () => {},
+      destroy: () => {
+        //noop
+      },
+      validate: () => false,
       max: 1,
       min: 0,
       idleTimeoutMillis: 1000,
@@ -51,8 +53,10 @@ tap.test('factory.create', (t) => {
           return delay(10).then(() => Promise.resolve({ id: created }));
         }
       },
-      destroy: () => {},
-      validate: () => {},
+      destroy: () => {
+        //noop
+      },
+      validate: () => false,
       max: 1,
       min: 0,
       idleTimeoutMillis: 1000,
