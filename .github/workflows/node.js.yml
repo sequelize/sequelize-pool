@@ -23,5 +23,5 @@ jobs:
       - run: npm ci
       - run: npm run lint
       - run: npm run types
-      - run: npm test
+      - run: npm run test:raw
       - run: npm run build --if-present
