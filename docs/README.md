@@ -44,4 +44,4 @@ ___
 
 ### LogLevel
 
-Ƭ **LogLevel**: ``"verbose"`` \| ``"info"`` \| ``"error"``
+Ƭ **LogLevel**: ``"verbose"`` \| ``"info"`` \| ``"warn"`` \| ``"error"``

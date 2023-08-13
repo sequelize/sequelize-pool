@@ -29,7 +29,7 @@ tap.test('async multiple calls', (t) => {
     num: number,
     inUseCount?: number,
     availableCount?: number,
-    releaseTimeout?: number
+    releaseTimeout?: number,
   ) {
     releaseTimeout = releaseTimeout || 100;
     inUseCount = inUseCount === undefined ? 0 : inUseCount;
@@ -41,7 +41,7 @@ tap.test('async multiple calls', (t) => {
       t.equal(
         borrowedObjects.indexOf(obj),
         -1,
-        'acquire returned an object is currently acquired'
+        'acquire returned an object is currently acquired',
       );
       borrowedObjects.push(obj);
 

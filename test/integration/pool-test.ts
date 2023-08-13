@@ -187,7 +187,7 @@ tap.test('logging', (t) => {
     .then(() => {
       t.equal(
         logMessages.verbose[0],
-        'createResource() - creating obj - count=1 min=0 max=2'
+        'createResource() - creating obj - count=1 min=0 max=2',
       );
       t.equal(logMessages.info[0], 'dispense() clients=1 available=0');
       t.end();
@@ -314,7 +314,7 @@ tap.test(
         t.end();
       })
       .catch(t.threw);
-  }
+  },
 );
 
 tap.test('removes from available objects on validation failure', (t) => {
@@ -487,7 +487,7 @@ tap.test(
         t.end();
       })
       .catch(t.threw);
-  }
+  },
 );
 
 tap.test(
@@ -540,7 +540,7 @@ tap.test(
 
         t.end();
       });
-  }
+  },
 );
 
 tap.test('pool destroys a resource when maxUses is reached', (t) => {

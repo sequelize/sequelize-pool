@@ -37,7 +37,9 @@ Pending acquires are acquire calls which are yet to receive an response from fac
 
 **`Default`**
 
+```ts
 30000
+```
 
 ___
 
@@ -89,7 +91,9 @@ This does not affects pending acquire requests.
 
 **`Default`**
 
+```ts
 30000
+```
 
 ___
 
@@ -102,7 +106,9 @@ that will be used instead. The function expects the arguments msg, loglevel
 
 **`Default`**
 
+```ts
 false
+```
 
 ___
 
@@ -128,7 +134,9 @@ full of pre-existing persistent connections.
 
 **`Default`**
 
+```ts
 Infinity
+```
 
 ___
 
@@ -159,7 +167,9 @@ Clean up is scheduled in every `factory.reapIntervalMillis` milliseconds.
 
 **`Default`**
 
+```ts
 1000
+```
 
 ___
 

@@ -242,7 +242,7 @@ export class Pool<RawResource> {
       this.log(message, level);
     } else if (this.log) {
       console.log(
-        `${level.toUpperCase()} pool ${this.name || ''} - ${message}`
+        `${level.toUpperCase()} pool ${this.name || ''} - ${message}`,
       );
     }
   }
@@ -268,7 +268,7 @@ export class Pool<RawResource> {
         // Client timed out, so destroy it.
         this._log(
           'removeIdle() destroying obj - now:' + now + ' timeout:' + timeout,
-          'verbose'
+          'verbose',
         );
         toRemove.push(this._availableObjects[i].resource);
       }
@@ -318,7 +318,7 @@ export class Pool<RawResource> {
 
     this._log(
       `dispense() clients=${waitingCount} available=${this._availableObjects.length}`,
-      'info'
+      'info',
     );
 
     if (waitingCount < 1) {
@@ -337,7 +337,7 @@ export class Pool<RawResource> {
       this._availableObjects.pop();
       this._addResourceToInUseObjects(
         wrappedResource.resource,
-        wrappedResource.useCount
+        wrappedResource.useCount,
       );
 
       const deferred = this._pendingAcquires.shift();
@@ -353,7 +353,7 @@ export class Pool<RawResource> {
     this._count += 1;
     this._log(
       `createResource() - creating obj - count=${this.size} min=${this.minSize} max=${this.maxSize}`,
-      'verbose'
+      'verbose',
     );
 
     this._factory
@@ -384,7 +384,7 @@ export class Pool<RawResource> {
 
   protected _addResourceToAvailableObjects(
     resource: RawResource,
-    useCount: number
+    useCount: number,
   ): void {
     const wrappedResource = {
       resource: resource,
@@ -399,7 +399,7 @@ export class Pool<RawResource> {
 
   protected _addResourceToInUseObjects(
     resource: RawResource,
-    useCount: number
+    useCount: number,
   ): void {
     const wrappedResource = {
       resource: resource,
@@ -429,7 +429,7 @@ export class Pool<RawResource> {
   acquire(): Promise<RawResource> {
     if (this._draining) {
       return Promise.reject(
-        new Error('pool is draining and cannot accept work')
+        new Error('pool is draining and cannot accept work'),
       );
     }
 
@@ -438,7 +438,7 @@ export class Pool<RawResource> {
       // timeout triggered, promise will be rejected
       // remove this object from pending list
       this._pendingAcquires = this._pendingAcquires.filter(
-        (pending) => pending !== deferred
+        (pending) => pending !== deferred,
       );
     });
 
@@ -457,24 +457,24 @@ export class Pool<RawResource> {
     // (i.e., is back in the pool of this._availableObjects)
     if (
       this._availableObjects.some(
-        (resourceWithTimeout) => resourceWithTimeout.resource === resource
+        (resourceWithTimeout) => resourceWithTimeout.resource === resource,
       )
     ) {
       this._log(
         'release called twice for the same resource: ' + new Error().stack,
-        'error'
+        'error',
       );
       return;
     }
 
     // check to see if this object exists in the `in use` list and remove it
     const index = this._inUseObjects.findIndex(
-      (wrappedResource) => wrappedResource.resource === resource
+      (wrappedResource) => wrappedResource.resource === resource,
     );
     if (index < 0) {
       this._log(
         'attempt to release an invalid resource: ' + new Error().stack,
-        'error'
+        'error',
       );
       return;
     }
@@ -489,7 +489,7 @@ export class Pool<RawResource> {
           wrappedResource.useCount +
           ' maxUsesPerResource:' +
           this.maxUsesPerResource,
-        'verbose'
+        'verbose',
       );
       this.destroy(wrappedResource.resource);
       // Since we are not adding the resource back to the availables list, we need to go
@@ -501,7 +501,7 @@ export class Pool<RawResource> {
       this._inUseObjects.splice(index, 1);
       this._addResourceToAvailableObjects(
         wrappedResource.resource,
-        wrappedResource.useCount
+        wrappedResource.useCount,
       );
     }
   }
@@ -516,10 +516,10 @@ export class Pool<RawResource> {
     const using = this._inUseObjects.length;
 
     this._availableObjects = this._availableObjects.filter(
-      (object) => object.resource !== resource
+      (object) => object.resource !== resource,
     );
     this._inUseObjects = this._inUseObjects.filter(
-      (object) => object.resource !== resource
+      (object) => object.resource !== resource,
     );
 
     // resource was not removed, then no need to decrement _count
@@ -603,7 +603,7 @@ export class Pool<RawResource> {
     clearTimeout(this._removeIdleTimer);
 
     const resources = this._availableObjects.map(
-      (resource) => resource.resource
+      (resource) => resource.resource,
     );
     const errors = [];
     for (const resource of resources) {

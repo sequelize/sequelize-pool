@@ -47,7 +47,7 @@ tap.test('factory.create', (t) => {
       create: function () {
         if (created++ < 5) {
           return delay(10).then(() =>
-            Promise.reject(new Error('Error occurred.'))
+            Promise.reject(new Error('Error occurred.')),
           );
         } else {
           return delay(10).then(() => Promise.resolve({ id: created }));

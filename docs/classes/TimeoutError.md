@@ -86,10 +86,6 @@ ___
 
 Optional override for formatting stack traces
 
-**`See`**
-
-https://github.com/v8/v8/wiki/Stack%20Trace%20API#customizing-stack-traces
-
 ##### Parameters
 
 | Name | Type |
@@ -100,6 +96,10 @@ https://github.com/v8/v8/wiki/Stack%20Trace%20API#customizing-stack-traces
 ##### Returns
 
 `any`
+
+**`See`**
+
+https://github.com/v8/v8/wiki/Stack%20Trace%20API#customizing-stack-traces
 
 #### Inherited from
 
