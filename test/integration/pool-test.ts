@@ -23,7 +23,7 @@ tap.test('pool expands only to max limit', (t) => {
     .then((obj) => {
       return pool.acquire().catch((e) => {
         t.ok(e instanceof TimeoutError);
-        t.ok(e.message === 'Operation timeout');
+        t.ok(e.message === 'Operation timeout: pool acquire');
         pool.release(obj);
         t.end();
       });

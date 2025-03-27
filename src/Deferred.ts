@@ -23,7 +23,7 @@ export class Deferred<T> {
 
     this._timeout = setTimeout(() => {
       callback();
-      this.reject(new TimeoutError('Operation timeout'));
+      this.reject(new TimeoutError('Operation timeout: pool acquire'));
     }, timeoutInMillis);
   }
 
