@@ -433,7 +433,9 @@ export class Pool<RawResource> {
       );
     }
 
-    const deferred = new Deferred<RawResource>();
+    const deferred = new Deferred<RawResource>({
+      errorMessage: 'Pool acquire operation timeout',
+    });
     deferred.registerTimeout(this.acquireTimeoutMillis, () => {
       // timeout triggered, promise will be rejected
       // remove this object from pending list

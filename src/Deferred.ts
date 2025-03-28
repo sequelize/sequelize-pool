@@ -1,5 +1,8 @@
 import { TimeoutError } from './TimeoutError';
 
+interface DeferredOptions {
+  errorMessage?: string;
+}
 /**
  * Deferred Implementation
  *
@@ -10,8 +13,10 @@ export class Deferred<T> {
   protected _resolve: (value: T) => void;
   protected _reject: (error: Error) => void;
   protected _timeout: NodeJS.Timer;
+  private options: DeferredOptions;
 
-  constructor() {
+  constructor(options: DeferredOptions = {}) {
+    this.options = options;
     this._promise = new Promise((resolve, reject) => {
       this._reject = reject;
       this._resolve = resolve;
@@ -23,7 +28,9 @@ export class Deferred<T> {
 
     this._timeout = setTimeout(() => {
       callback();
-      this.reject(new TimeoutError('Operation timeout'));
+      this.reject(
+        new TimeoutError(this.options.errorMessage ?? 'Operation timeout'),
+      );
     }, timeoutInMillis);
   }
 
