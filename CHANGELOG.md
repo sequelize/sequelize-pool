@@ -1,5 +1,10 @@
 # Changelog
 
+## 8.0.1
+
+- change: descriptive pool acquire timeout error message [#57](https://github.com/sequelize/sequelize-pool/pull/57)
+
+
 ## 8.0.0
 
 - fix: correctly default pool configuration options, fixes [#48](https://github.com/sequelize/sequelize-pool/issues/48)
