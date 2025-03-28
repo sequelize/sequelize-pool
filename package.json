@@ -51,5 +51,9 @@
   "prettier": {
     "singleQuote": true
   },
+  "tap": {
+    "disable-coverage": false,
+    "allow-incomplete-coverage": true
+  },
   "license": "MIT"
 }
