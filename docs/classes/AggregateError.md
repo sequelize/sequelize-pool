@@ -1,152 +1,142 @@
+[**sequelize-pool**](../README.md)
+
+***
+
 [sequelize-pool](../README.md) / AggregateError
 
 # Class: AggregateError
 
 A wrapper for multiple Errors
 
-## Hierarchy
+## Extends
 
 - `Error`
 
-  ↳ **`AggregateError`**
-
-## Table of contents
-
-### Constructors
-
-- [constructor](AggregateError.md#constructor)
-
-### Properties
-
-- [errors](AggregateError.md#errors)
-- [message](AggregateError.md#message)
-- [name](AggregateError.md#name)
-- [stack](AggregateError.md#stack)
-- [prepareStackTrace](AggregateError.md#preparestacktrace)
-- [stackTraceLimit](AggregateError.md#stacktracelimit)
-
-### Methods
-
-- [toString](AggregateError.md#tostring)
-- [captureStackTrace](AggregateError.md#capturestacktrace)
-
 ## Constructors
 
-### constructor
+### Constructor
 
-• **new AggregateError**(`errors`)
+> **new AggregateError**(`errors`): `AggregateError`
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `errors` | `Error`[] |
+##### errors
+
+`Error`[]
+
+#### Returns
+
+`AggregateError`
 
 #### Overrides
 
-Error.constructor
+`Error.constructor`
 
 ## Properties
 
 ### errors
 
-• **errors**: `Error`[]
+> **errors**: `Error`[]
 
-___
+***
 
 ### message
 
-• **message**: `string`
+> **message**: `string`
 
 #### Inherited from
 
-Error.message
+`Error.message`
 
-___
+***
 
 ### name
 
-• **name**: `string`
+> **name**: `string`
 
 #### Inherited from
 
-Error.name
+`Error.name`
 
-___
+***
 
-### stack
+### stack?
 
-• `Optional` **stack**: `string`
+> `optional` **stack**: `string`
 
 #### Inherited from
 
-Error.stack
+`Error.stack`
 
-___
+***
 
-### prepareStackTrace
+### prepareStackTrace()?
 
-▪ `Static` `Optional` **prepareStackTrace**: (`err`: `Error`, `stackTraces`: `CallSite`[]) => `any`
-
-#### Type declaration
-
-▸ (`err`, `stackTraces`): `any`
+> `static` `optional` **prepareStackTrace**: (`err`, `stackTraces`) => `any`
 
 Optional override for formatting stack traces
 
-##### Parameters
+#### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `err` | `Error` |
-| `stackTraces` | `CallSite`[] |
+##### err
 
-##### Returns
+`Error`
+
+##### stackTraces
+
+`CallSite`[]
+
+#### Returns
 
 `any`
 
-**`See`**
+#### See
 
 https://github.com/v8/v8/wiki/Stack%20Trace%20API#customizing-stack-traces
 
 #### Inherited from
 
-Error.prepareStackTrace
+`Error.prepareStackTrace`
 
-___
+***
 
 ### stackTraceLimit
 
-▪ `Static` **stackTraceLimit**: `number`
+> `static` **stackTraceLimit**: `number`
 
 #### Inherited from
 
-Error.stackTraceLimit
+`Error.stackTraceLimit`
 
 ## Methods
 
-### toString
+### toString()
 
-▸ **toString**(): `string`
+> **toString**(): `string`
+
+Returns a string representation of an object.
 
 #### Returns
 
 `string`
 
-___
+***
 
-### captureStackTrace
+### captureStackTrace()
 
-▸ `Static` **captureStackTrace**(`targetObject`, `constructorOpt?`): `void`
+> `static` **captureStackTrace**(`targetObject`, `constructorOpt`?): `void`
 
 Create .stack property on a target object
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `targetObject` | `Object` |
-| `constructorOpt?` | `Function` |
+##### targetObject
+
+`Object`
+
+##### constructorOpt?
+
+`Function`
 
 #### Returns
 
@@ -154,4 +144,4 @@ Create .stack property on a target object
 
 #### Inherited from
 
-Error.captureStackTrace
+`Error.captureStackTrace`

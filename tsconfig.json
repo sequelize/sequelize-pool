@@ -7,15 +7,6 @@
     "preserveConstEnums": true,
     "noEmit": true
   },
-  "typedocOptions": {
-    "out": "docs",
-    "entryPoints": ["src/index.ts"],
-    "plugin": "typedoc-plugin-markdown",
-    "excludePrivate": true,
-    "excludeProtected": true,
-    "disableSources": true,
-    "readme": "none"
-  },
   "include": ["src", "test"],
   "exclude": ["node_modules"]
 }

@@ -1,147 +1,139 @@
+[**sequelize-pool**](../README.md)
+
+***
+
 [sequelize-pool](../README.md) / Pool
 
-# Class: Pool<RawResource\>
+# Class: Pool\<RawResource\>
 
-## Type parameters
+## Type Parameters
 
-| Name |
-| :------ |
-| `RawResource` |
+### RawResource
 
-## Table of contents
-
-### Constructors
-
-- [constructor](Pool.md#constructor)
-
-### Accessors
-
-- [available](Pool.md#available)
-- [maxSize](Pool.md#maxsize)
-- [minSize](Pool.md#minsize)
-- [name](Pool.md#name)
-- [size](Pool.md#size)
-- [using](Pool.md#using)
-- [waiting](Pool.md#waiting)
-
-### Methods
-
-- [acquire](Pool.md#acquire)
-- [destroy](Pool.md#destroy)
-- [destroyAllNow](Pool.md#destroyallnow)
-- [drain](Pool.md#drain)
-- [release](Pool.md#release)
+`RawResource`
 
 ## Constructors
 
-### constructor
+### Constructor
 
-• **new Pool**<`RawResource`\>(`factory`)
+> **new Pool**\<`RawResource`\>(`factory`): `Pool`\<`RawResource`\>
 
 Generate an object pool with a specified `factory`.
 
-#### Type parameters
-
-| Name |
-| :------ |
-| `RawResource` |
-
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `factory` | [`FactoryOptions`](../interfaces/FactoryOptions.md)<`RawResource`\> |
+##### factory
+
+[`FactoryOptions`](../interfaces/FactoryOptions.md)\<`RawResource`\>
+
+#### Returns
+
+`Pool`\<`RawResource`\>
 
 ## Accessors
 
 ### available
 
-• `get` **available**(): `number`
+#### Get Signature
+
+> **get** **available**(): `number`
 
 Number of unused resources in the pool
 
-#### Returns
+##### Returns
 
 `number`
 
-___
+***
 
 ### maxSize
 
-• `get` **maxSize**(): `number`
+#### Get Signature
+
+> **get** **maxSize**(): `number`
 
 Maximum number of resources allowed by pool
 
-#### Returns
+##### Returns
 
 `number`
 
-___
+***
 
 ### minSize
 
-• `get` **minSize**(): `number`
+#### Get Signature
+
+> **get** **minSize**(): `number`
 
 Minimum number of resources allowed by pool
 
-#### Returns
+##### Returns
 
 `number`
 
-___
+***
 
 ### name
 
-• `get` **name**(): `string`
+#### Get Signature
+
+> **get** **name**(): `string`
 
 factory.name for this pool
 
-#### Returns
+##### Returns
 
 `string`
 
-___
+***
 
 ### size
 
-• `get` **size**(): `number`
+#### Get Signature
+
+> **get** **size**(): `number`
 
 Number of resources in the pool regardless of
 whether they are free or in use
 
-#### Returns
+##### Returns
 
 `number`
 
-___
+***
 
 ### using
 
-• `get` **using**(): `number`
+#### Get Signature
+
+> **get** **using**(): `number`
 
 Number of in use resources
 
-#### Returns
+##### Returns
 
 `number`
 
-___
+***
 
 ### waiting
 
-• `get` **waiting**(): `number`
+#### Get Signature
+
+> **get** **waiting**(): `number`
 
 Number of callers waiting to acquire a resource
 
-#### Returns
+##### Returns
 
 `number`
 
 ## Methods
 
-### acquire
+### acquire()
 
-▸ **acquire**(): `Promise`<`RawResource`\>
+> **acquire**(): `Promise`\<`RawResource`\>
 
 Requests a new resource. This will call factory.create to request new resource.
 
@@ -152,13 +144,13 @@ back within specified `acquireTimeoutMillis`
 
 #### Returns
 
-`Promise`<`RawResource`\>
+`Promise`\<`RawResource`\>
 
-___
+***
 
-### destroy
+### destroy()
 
-▸ **destroy**(`resource`): `Promise`<`void`\>
+> **destroy**(`resource`): `Promise`\<`void`\>
 
 Removes a resource from pool. The factory's destroy handler will be called with given resource.
 
@@ -166,19 +158,19 @@ This is an alternative to `release()`
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `resource` | `RawResource` |
+##### resource
+
+`RawResource`
 
 #### Returns
 
-`Promise`<`void`\>
+`Promise`\<`void`\>
 
-___
+***
 
-### destroyAllNow
+### destroyAllNow()
 
-▸ **destroyAllNow**(): `Promise`<`void`\>
+> **destroyAllNow**(): `Promise`\<`void`\>
 
 Forcibly destroys all clients regardless of timeout. Intended to be
 invoked as part of a drain. Does not prevent the creation of new
@@ -193,34 +185,34 @@ to zero before calling `destroyAllNow()`
 
 #### Returns
 
-`Promise`<`void`\>
+`Promise`\<`void`\>
 
-___
+***
 
-### drain
+### drain()
 
-▸ **drain**(): `Promise`<`void`\>
+> **drain**(): `Promise`\<`void`\>
 
 Disallow any new acquire requests and let the request backlog dissipate.
 
 #### Returns
 
-`Promise`<`void`\>
+`Promise`\<`void`\>
 
-___
+***
 
-### release
+### release()
 
-▸ **release**(`resource`): `void`
+> **release**(`resource`): `void`
 
 Return the resource to the pool, add it to the available objects.
 Resource will be available for use by pending or future `acquire()` calls
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `resource` | `RawResource` |
+##### resource
+
+`RawResource`
 
 #### Returns
 

@@ -20,19 +20,21 @@
   ],
   "types": "types",
   "devDependencies": {
-    "@types/node": "^10.17.60",
-    "@types/tap": "^15.0.8",
-    "@typescript-eslint/eslint-plugin": "^6.3.0",
-    "@typescript-eslint/parser": "^6.3.0",
-    "eslint": "^8.47.0",
-    "eslint-config-prettier": "^9.0.0",
-    "eslint-plugin-prettier": "^5.0.0",
-    "prettier": "^3.0.1",
-    "tap": "^16.3.8",
-    "ts-node": "^10.9.1",
-    "typedoc": "^0.24.8",
-    "typedoc-plugin-markdown": "^3.15.4",
-    "typescript": "^5.1.6"
+    "@eslint/eslintrc": "^3.3.1",
+    "@eslint/js": "^9.23.0",
+    "@types/node": "^10.x",
+    "@typescript-eslint/eslint-plugin": "^8.28.0",
+    "@typescript-eslint/parser": "^8.28.0",
+    "eslint": "^9.23.0",
+    "eslint-config-prettier": "^10.1.1",
+    "eslint-plugin-prettier": "^5.2.5",
+    "globals": "^16.0.0",
+    "prettier": "^3.5.3",
+    "tap": "^21.1.0",
+    "ts-node": "^10.9.2",
+    "typedoc": "^0.28.1",
+    "typedoc-plugin-markdown": "^4.6.0",
+    "typescript": "^5.8.2"
   },
   "engines": {
     "node": ">= 10.0.0"
@@ -43,14 +45,11 @@
     "test": "npm run lint && npm run test:raw",
     "lint": "eslint --ext .ts src/**/* test/**/*",
     "pretty": "prettier src test --write",
-    "docs": "typedoc",
-    "test:raw": "tap --ts test/**/*-test.ts"
+    "docs": "typedoc --tsconfig tsconfig-doc.json",
+    "test:raw": "tap test/**/*-test.ts"
   },
   "prettier": {
     "singleQuote": true
-  },
-  "tap": {
-    "check-coverage": false
   },
   "license": "MIT"
 }
